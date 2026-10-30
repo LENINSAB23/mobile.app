@@ -60,8 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Iniciando en Modo Demostración (Catálogo de Repuestos y Taller)'),
-        backgroundColor: Colors.blueAccent,
+        content: Text('Iniciando en Modo Demostración'),
+        backgroundColor: Color(0xFF27272A),
         duration: Duration(seconds: 2),
       ),
     );
@@ -81,33 +81,35 @@ class _LoginScreenState extends State<LoginScreen> {
       auth.setRole(_selectedRole);
       _navigateToRoleScreen();
     } else {
-      // Show connection helper dialog so user is never blocked
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          backgroundColor: const Color(0xFF1E293B),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          backgroundColor: const Color(0xFF18181B),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(color: Color(0xFF27272A)),
+          ),
           title: const Row(
             children: [
-              Icon(Icons.wifi_off_rounded, color: Colors.orangeAccent),
+              Icon(Icons.cloud_off_outlined, color: Colors.white70, size: 20),
               SizedBox(width: 8),
               Expanded(
-                child: Text('Servidor no disponible', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                child: Text('Servidor no disponible', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
               ),
             ],
           ),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'No se pudo conectar con el sistema central en este momento.',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
+              Text(
+                'No se pudo conectar con la API central en este momento.',
+                style: TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
               ),
-              const SizedBox(height: 12),
-              const Text(
-                'Puedes ingresar en Modo Demostración para explorar el catálogo de repuestos, el carrito, pedidos y el mapa de seguimiento en vivo.',
-                style: TextStyle(color: Colors.grey, fontSize: 12),
+              SizedBox(height: 10),
+              Text(
+                'Puedes ingresar en Modo Demostración para acceder al catálogo, pedidos y navegación.',
+                style: TextStyle(color: Color(0xFF71717A), fontSize: 12),
               ),
             ],
           ),
@@ -117,16 +119,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 Navigator.pop(ctx);
                 _showServerIpDialog();
               },
-              child: const Text('Ajustes de Red', style: TextStyle(color: Colors.grey)),
+              child: const Text('Ajustes de Red', style: TextStyle(color: Color(0xFFA1A1AA))),
             ),
-            ElevatedButton.icon(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(ctx);
                 _enterDemoMode();
               },
-              icon: const Icon(Icons.flash_on, color: Colors.white, size: 16),
-              label: const Text('Entrar en Modo Demo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: const Color(0xFF09090B),
+              ),
+              child: const Text('Modo Demo', style: TextStyle(fontWeight: FontWeight.w600)),
             ),
           ],
         ),
@@ -141,12 +145,16 @@ class _LoginScreenState extends State<LoginScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(color: Color(0xFF27272A)),
+        ),
         title: const Row(
           children: [
-            Icon(Icons.wifi, color: Colors.blueAccent),
+            Icon(Icons.tune_outlined, color: Colors.white, size: 18),
             SizedBox(width: 8),
-            Text('Configuración de Conexión', style: TextStyle(color: Colors.white, fontSize: 16)),
+            Text('Parámetros de Servidor', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
           ],
         ),
         content: Column(
@@ -154,64 +162,57 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Dirección de conexión del sistema central:',
-              style: TextStyle(color: Colors.grey, fontSize: 12),
+              'Dirección IP o Host del Backend Laravel:',
+              style: TextStyle(color: Color(0xFFA1A1AA), fontSize: 12),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: ipController,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                labelText: 'Dirección del Servidor',
-                labelStyle: const TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.white, fontSize: 13),
+              decoration: const InputDecoration(
+                labelText: 'Host / IP',
+                labelStyle: TextStyle(color: Color(0xFF71717A), fontSize: 12),
                 filled: true,
-                fillColor: const Color(0xFF0F172A),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                fillColor: Color(0xFF09090B),
+                border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF27272A))),
+                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             TextField(
               controller: portController,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
+              keyboardType: TextInputType.number,
+              style: const TextStyle(color: Colors.white, fontSize: 13),
+              decoration: const InputDecoration(
                 labelText: 'Puerto',
-                labelStyle: const TextStyle(color: Colors.grey),
+                labelStyle: TextStyle(color: Color(0xFF71717A), fontSize: 12),
                 filled: true,
-                fillColor: const Color(0xFF0F172A),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                fillColor: Color(0xFF09090B),
+                border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF27272A))),
+                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               ),
             ),
-            const SizedBox(height: 12),
-            const Text('Preajustes rápidos:', style: TextStyle(color: Colors.grey, fontSize: 11)),
+            const SizedBox(height: 14),
+            const Text('Presets Rápidos:', style: TextStyle(color: Color(0xFF71717A), fontSize: 11)),
             const SizedBox(height: 6),
             Wrap(
-              spacing: 8,
-              runSpacing: 6,
+              spacing: 6,
               children: [
                 ActionChip(
-                  backgroundColor: const Color(0xFF1E3A8A),
-                  avatar: const Icon(Icons.wifi, size: 14, color: Colors.lightBlueAccent),
-                  label: const Text('WiFi (10.212.84.82)', style: TextStyle(color: Colors.white, fontSize: 11)),
+                  label: const Text('USB adb reverse (127.0.0.1)', style: TextStyle(fontSize: 11)),
+                  backgroundColor: const Color(0xFF27272A),
+                  side: BorderSide.none,
                   onPressed: () {
-                    ipController.text = ApiConfig.detectedLocalIp;
+                    ipController.text = '127.0.0.1';
                     portController.text = '8000';
                   },
                 ),
                 ActionChip(
-                  backgroundColor: const Color(0xFF065F46),
-                  avatar: const Icon(Icons.usb, size: 14, color: Colors.greenAccent),
-                  label: const Text('USB (127.0.0.1)', style: TextStyle(color: Colors.white, fontSize: 11)),
+                  label: const Text('Emulador Android (10.0.2.2)', style: TextStyle(fontSize: 11)),
+                  backgroundColor: const Color(0xFF27272A),
+                  side: BorderSide.none,
                   onPressed: () {
-                    ipController.text = ApiConfig.usbAdbIp;
-                    portController.text = '8000';
-                  },
-                ),
-                ActionChip(
-                  backgroundColor: const Color(0xFF374151),
-                  avatar: const Icon(Icons.phone_android, size: 14, color: Colors.orangeAccent),
-                  label: const Text('Emulador (10.0.2.2)', style: TextStyle(color: Colors.white, fontSize: 11)),
-                  onPressed: () {
-                    ipController.text = ApiConfig.emulatorIp;
+                    ipController.text = '10.0.2.2';
                     portController.text = '8000';
                   },
                 ),
@@ -222,20 +223,22 @@ class _LoginScreenState extends State<LoginScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.grey)),
+            child: const Text('Cancelar', style: TextStyle(color: Color(0xFFA1A1AA))),
           ),
           ElevatedButton(
             onPressed: () async {
-              await ApiConfig.setServerIp(ipController.text, port: portController.text);
-              if (!mounted) return;
-              if (ctx.mounted) Navigator.pop(ctx);
-              setState(() {});
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Conexión actualizada exitosamente')),
+              await ApiConfig.setServerIp(
+                ipController.text.trim(),
+                port: portController.text.trim(),
               );
+              if (mounted) setState(() {});
+              if (ctx.mounted) Navigator.pop(ctx);
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
-            child: const Text('Guardar', style: TextStyle(color: Colors.white)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF09090B),
+            ),
+            child: const Text('Guardar'),
           ),
         ],
       ),
@@ -247,13 +250,13 @@ class _LoginScreenState extends State<LoginScreen> {
     final auth = Provider.of<AuthProvider>(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.blueAccent),
+            icon: const Icon(Icons.tune_outlined, color: Color(0xFFA1A1AA), size: 20),
             tooltip: 'Configuración de Conexión',
             onPressed: _showServerIpDialog,
           ),
@@ -262,45 +265,49 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Brand Header
+                // Logo de Empresa Oficial (Rinoceronte minimalista)
                 Container(
-                  padding: const EdgeInsets.all(18),
+                  width: 80,
+                  height: 80,
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.blue.withValues(alpha: 0.15),
-                    shape: BoxShape.circle,
+                    color: const Color(0xFF18181B),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: const Color(0xFF27272A)),
                   ),
-                  child: const Icon(
-                    Icons.two_wheeler_rounded,
-                    size: 64,
-                    color: Colors.blueAccent,
+                  child: Image.asset(
+                    'assets/images/logo_white.png',
+                    fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 const Text(
                   'GRUPO RINO E.I.R.L.',
                   style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
                     color: Colors.white,
-                    letterSpacing: 1.2,
+                    letterSpacing: 0.8,
                   ),
                 ),
+                const SizedBox(height: 4),
                 const Text(
-                  'Repuestos de Autos, Motos & Mecánica',
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  'Repuestos Automotrices & Motocicletas • Huánuco',
+                  style: TextStyle(fontSize: 12, color: Color(0xFFA1A1AA)),
                 ),
-                const SizedBox(height: 28),
+                const SizedBox(height: 32),
 
-                // Role Selector Pills
+                // Role Selector Monocromático
                 Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E293B),
-                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xFF18181B),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: const Color(0xFF27272A)),
                   ),
                   child: Row(
                     children: [
@@ -313,23 +320,35 @@ class _LoginScreenState extends State<LoginScreen> {
                             });
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               color: _selectedRole == 'customer'
-                                  ? Colors.blueAccent
+                                  ? Colors.white
                                   : Colors.transparent,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Center(
-                              child: Text(
-                                '🛍️ Cliente',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.person_outline,
+                                  size: 16,
                                   color: _selectedRole == 'customer'
-                                      ? Colors.white
-                                      : Colors.grey,
+                                      ? const Color(0xFF09090B)
+                                      : const Color(0xFFA1A1AA),
                                 ),
-                              ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Cliente',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13,
+                                    color: _selectedRole == 'customer'
+                                        ? const Color(0xFF09090B)
+                                        : const Color(0xFFA1A1AA),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -343,23 +362,35 @@ class _LoginScreenState extends State<LoginScreen> {
                             });
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               color: _selectedRole == 'driver'
-                                  ? Colors.orangeAccent
+                                  ? Colors.white
                                   : Colors.transparent,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Center(
-                              child: Text(
-                                '🛵 Repartidor',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.delivery_dining_outlined,
+                                  size: 16,
                                   color: _selectedRole == 'driver'
-                                      ? Colors.black
-                                      : Colors.grey,
+                                      ? const Color(0xFF09090B)
+                                      : const Color(0xFFA1A1AA),
                                 ),
-                              ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Repartidor',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13,
+                                    color: _selectedRole == 'driver'
+                                        ? const Color(0xFF09090B)
+                                        : const Color(0xFFA1A1AA),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -369,110 +400,116 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 24),
 
-                // Form Inputs
+                // Form Inputs Minimalistas
                 TextField(
                   controller: _emailController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
                   decoration: InputDecoration(
                     labelText: 'Correo Electrónico',
-                    labelStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(Icons.email_outlined, color: Colors.blueAccent),
+                    labelStyle: const TextStyle(color: Color(0xFF71717A), fontSize: 13),
+                    prefixIcon: const Icon(Icons.email_outlined, color: Color(0xFFA1A1AA), size: 18),
                     filled: true,
-                    fillColor: const Color(0xFF1E293B),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
+                    fillColor: const Color(0xFF18181B),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Color(0xFF27272A)),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Color(0xFF71717A)),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
                 TextField(
                   controller: _passwordController,
                   obscureText: true,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
                   decoration: InputDecoration(
                     labelText: 'Contraseña',
-                    labelStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(Icons.lock_outline, color: Colors.blueAccent),
+                    labelStyle: const TextStyle(color: Color(0xFF71717A), fontSize: 13),
+                    prefixIcon: const Icon(Icons.lock_outline, color: Color(0xFFA1A1AA), size: 18),
                     filled: true,
-                    fillColor: const Color(0xFF1E293B),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
+                    fillColor: const Color(0xFF18181B),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Color(0xFF27272A)),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Color(0xFF71717A)),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                   ),
                 ),
                 const SizedBox(height: 24),
 
-                // Submit Button
+                // Botón Ingresar
                 SizedBox(
                   width: double.infinity,
-                  height: 52,
+                  height: 48,
                   child: ElevatedButton(
                     onPressed: auth.isLoading ? null : _handleLogin,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(0xFF09090B),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
                     child: auth.isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(color: Color(0xFF09090B), strokeWidth: 2),
+                          )
                         : const Text(
-                            'Ingresar al Sistema',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            'Iniciar Sesión',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                           ),
                   ),
                 ),
                 const SizedBox(height: 12),
 
-                // Direct Demo Mode Button (Never get blocked)
+                // Botón Modo Demostración
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
-                  child: OutlinedButton.icon(
+                  height: 44,
+                  child: OutlinedButton(
                     onPressed: _enterDemoMode,
-                    icon: const Icon(Icons.flash_on, color: Colors.amberAccent, size: 18),
-                    label: const Text(
-                      '⚡ Ingresar en Modo Demostración',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.amberAccent,
-                      ),
-                    ),
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.amberAccent, width: 1.2),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                      side: const BorderSide(color: Color(0xFF27272A)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: const Text(
+                      'Modo Demostración (Offline)',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFA1A1AA),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
 
-                // Server Status Indicator (Sin mostrar números técnicos de IP)
+                // Conexión Indicador Minimalista
                 GestureDetector(
                   onTap: _showServerIpDialog,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
+                      color: const Color(0xFF18181B),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: const Color(0xFF27272A)),
                     ),
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.check_circle_outline, size: 14, color: Colors.greenAccent),
-                        SizedBox(width: 6),
+                        Icon(Icons.circle, size: 7, color: Color(0xFF22C55E)),
+                        SizedBox(width: 7),
                         Text(
-                          'Sistema Conectado',
-                          style: TextStyle(color: Colors.white70, fontSize: 12),
+                          'Sistema Preparado',
+                          style: TextStyle(color: Color(0xFFA1A1AA), fontSize: 11),
                         ),
                       ],
                     ),

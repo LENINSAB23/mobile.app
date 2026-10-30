@@ -242,7 +242,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Row(
           children: [
@@ -294,7 +294,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('¡Orden #${order.orderNumber} marcada como entregada con éxito! (+S/ 5.00 ganados)'),
-                  backgroundColor: const Color(0xFF1E293B),
+                  backgroundColor: const Color(0xFF18181B),
                 ),
               );
             },
@@ -314,7 +314,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('¿Cerrar Sesión?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         content: const Text(
@@ -358,7 +358,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
           margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E293B),
+            color: const Color(0xFF18181B),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: telemetry.isTracking ? Colors.greenAccent : Colors.orangeAccent,
@@ -378,7 +378,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                         style: TextStyle(color: Colors.grey, fontSize: 11),
                       ),
                       Text(
-                        telemetry.isTracking ? '🟢 MODO ACTIVO EN CALLE' : '🔴 MODO INACTIVO',
+                        telemetry.isTracking ? 'MODO ACTIVO EN RUTA' : 'MODO INACTIVO',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -405,7 +405,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                                 Text('Activando GPS satelital en tiempo real...'),
                               ],
                             ),
-                            backgroundColor: Color(0xFF1E293B),
+                            backgroundColor: Color(0xFF18181B),
                             duration: Duration(seconds: 2),
                           ),
                         );
@@ -478,7 +478,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                           margin: const EdgeInsets.only(bottom: 12),
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1E293B),
+                            color: const Color(0xFF18181B),
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
                           ),
@@ -617,7 +617,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E293B),
+                  color: const Color(0xFF18181B),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
                 ),
@@ -640,7 +640,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E293B),
+                  color: const Color(0xFF18181B),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: const Color(0xFF34D399).withValues(alpha: 0.3)),
                 ),
@@ -680,7 +680,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E293B),
+                  color: const Color(0xFF18181B),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
                 ),
@@ -803,7 +803,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                   height: 54,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B),
+                      color: const Color(0xFF18181B),
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: telemetry.hasRealGpsFix ? Colors.greenAccent : Colors.orangeAccent,
@@ -835,7 +835,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E293B).withValues(alpha: 0.95),
+              color: const Color(0xFF18181B).withValues(alpha: 0.95),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: telemetry.hasRealGpsFix ? Colors.greenAccent : Colors.orangeAccent,
@@ -873,7 +873,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
             children: [
               FloatingActionButton.small(
                 heroTag: 'driver_recenter',
-                backgroundColor: const Color(0xFF1E293B),
+                backgroundColor: const Color(0xFF18181B),
                 tooltip: 'Obtener mi ubicación GPS actual',
                 onPressed: () async {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -889,7 +889,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                           Text('Obteniendo ubicación GPS real...', style: TextStyle(color: Colors.white)),
                         ],
                       ),
-                      backgroundColor: Color(0xFF1E293B),
+                      backgroundColor: Color(0xFF18181B),
                       duration: Duration(seconds: 2),
                     ),
                   );
@@ -914,7 +914,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               if (_selectedOrderForMap != null)
                 FloatingActionButton.small(
                   heroTag: 'open_fullscreen_nav',
-                  backgroundColor: const Color(0xFF1E293B),
+                  backgroundColor: const Color(0xFF18181B),
                   tooltip: 'Navegación Pantalla Completa',
                   onPressed: () {
                     Navigator.push(
@@ -938,7 +938,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E293B).withValues(alpha: 0.95),
+              color: const Color(0xFF18181B).withValues(alpha: 0.95),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.3)),
               boxShadow: const [BoxShadow(color: Colors.black45, blurRadius: 15)],
@@ -1002,7 +1002,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
+              colors: [Color(0xFF18181B), Color(0xFF09090B)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -1055,7 +1055,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E293B),
+            color: const Color(0xFF18181B),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
           ),
@@ -1096,7 +1096,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
         // Server Configuration Tile
         ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          tileColor: const Color(0xFF1E293B),
+          tileColor: const Color(0xFF18181B),
           leading: const Icon(Icons.wifi, color: Colors.blueAccent),
           title: const Text('Configuración de Conexión', style: TextStyle(color: Colors.white, fontSize: 13)),
           subtitle: const Text('Ajustes de red y sincronización', style: TextStyle(color: Colors.grey, fontSize: 11)),
@@ -1133,7 +1133,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         title: const Text('Configuración de Conexión', style: TextStyle(color: Colors.white, fontSize: 16)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1191,13 +1191,23 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         elevation: 0,
         title: Row(
           children: [
-            const Icon(Icons.two_wheeler, color: Colors.orangeAccent, size: 22),
+            Container(
+              width: 30,
+              height: 30,
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                color: const Color(0xFF18181B),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFF27272A)),
+              ),
+              child: Image.asset('assets/images/logo_white.png', fit: BoxFit.contain),
+            ),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
@@ -1241,7 +1251,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
       // BARRA INFERIOR (BOTTOM NAVIGATION BAR)
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF1E293B),
+          color: Color(0xFF18181B),
           border: Border(top: BorderSide(color: Colors.white10, width: 1)),
         ),
         child: BottomNavigationBar(
@@ -1257,7 +1267,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               });
             }
           },
-          backgroundColor: const Color(0xFF1E293B),
+          backgroundColor: const Color(0xFF18181B),
           selectedItemColor: Colors.orangeAccent,
           unselectedItemColor: Colors.grey,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),

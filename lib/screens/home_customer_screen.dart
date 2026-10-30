@@ -80,11 +80,11 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
 
   // Fallback automotive catalog if backend has not yet seeded or is offline
   List<CategoryModel> get _fallbackCategories => [
-    CategoryModel(id: 1, name: '🛢️ Aceites & Lubricantes', slug: 'aceites-lubricantes'),
-    CategoryModel(id: 2, name: '🚗 Repuestos Autos', slug: 'repuestos-autos'),
-    CategoryModel(id: 3, name: '🏍️ Repuestos Motos', slug: 'repuestos-motos'),
-    CategoryModel(id: 4, name: '⚡ Baterías & Luces', slug: 'baterias-electricos'),
-    CategoryModel(id: 5, name: '🔧 Herramientas Taller', slug: 'herramientas-mecanica'),
+    CategoryModel(id: 1, name: 'Aceites & Lubricantes', slug: 'aceites-lubricantes'),
+    CategoryModel(id: 2, name: 'Repuestos Autos', slug: 'repuestos-autos'),
+    CategoryModel(id: 3, name: 'Repuestos Motos', slug: 'repuestos-motos'),
+    CategoryModel(id: 4, name: 'Baterías & Iluminación', slug: 'baterias-electricos'),
+    CategoryModel(id: 5, name: 'Herramientas de Taller', slug: 'herramientas-mecanica'),
   ];
 
   List<ProductModel> get _fallbackProducts => [
@@ -311,7 +311,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1E293B),
+      backgroundColor: const Color(0xFF18181B),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -416,7 +416,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                             Expanded(child: Text('${prod.name} agregado al carrito')),
                           ],
                         ),
-                        backgroundColor: const Color(0xFF1E293B),
+                        backgroundColor: const Color(0xFF18181B),
                         duration: const Duration(seconds: 2),
                         action: SnackBarAction(
                           label: 'Ver Carrito',
@@ -513,7 +513,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         context: context,
         barrierDismissible: false,
         builder: (_) => AlertDialog(
-          backgroundColor: const Color(0xFF1E293B),
+          backgroundColor: const Color(0xFF18181B),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: const Text('¡Pedido Confirmado!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           content: Column(
@@ -587,12 +587,12 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
 
   String _getStatusText(String status) {
     switch (status) {
-      case 'in_transit': return '🛵 En Ruta de Entrega (GPS)';
+      case 'in_transit': return 'En Ruta de Entrega (GPS)';
       case 'cooking':
-      case 'preparing': return '🛠️ Alistando en Almacén / Taller';
+      case 'preparing': return '️ Alistando en Almacén / Taller';
       case 'delivered': return '✅ Entregado';
       case 'cancelled': return '❌ Cancelado';
-      default: return '🕒 Pendiente de Confirmación';
+      default: return ' Pendiente de Confirmación';
     }
   }
 
@@ -624,7 +624,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                     )
                   : null,
               filled: true,
-              fillColor: const Color(0xFF1E293B),
+              fillColor: const Color(0xFF18181B),
               contentPadding: const EdgeInsets.symmetric(vertical: 0),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
@@ -647,10 +647,10 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: FilterChip(
-                    label: const Text('🏎️ Todos'),
+                    label: const Text('️ Todos'),
                     selected: isSelected,
                     selectedColor: Colors.blueAccent,
-                    backgroundColor: const Color(0xFF1E293B),
+                    backgroundColor: const Color(0xFF18181B),
                     labelStyle: TextStyle(
                       color: isSelected ? Colors.white : Colors.grey,
                       fontWeight: FontWeight.bold,
@@ -668,7 +668,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   label: Text(cat.name),
                   selected: isSelected,
                   selectedColor: Colors.blueAccent,
-                  backgroundColor: const Color(0xFF1E293B),
+                  backgroundColor: const Color(0xFF18181B),
                   labelStyle: TextStyle(
                     color: isSelected ? Colors.white : Colors.grey,
                     fontWeight: FontWeight.bold,
@@ -736,7 +736,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                         return Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1E293B),
+                            color: const Color(0xFF18181B),
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
                           ),
@@ -808,7 +808,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                                                   SnackBar(
                                                     content: Text('${prod.name} agregado'),
                                                     duration: const Duration(seconds: 1),
-                                                    backgroundColor: const Color(0xFF1E293B),
+                                                    backgroundColor: const Color(0xFF18181B),
                                                   ),
                                                 );
                                               },
@@ -858,7 +858,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         // Orders Header & Filter
         Container(
           padding: const EdgeInsets.all(16),
-          color: const Color(0xFF1E293B),
+          color: const Color(0xFF18181B),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -896,7 +896,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   ),
                   const SizedBox(width: 8),
                   ChoiceChip(
-                    label: const Text('🛵 En Camino / Taller'),
+                    label: const Text('En Camino'),
                     selected: _orderStatusFilter == 'active',
                     selectedColor: Colors.orangeAccent,
                     onSelected: (_) => setState(() => _orderStatusFilter = 'active'),
@@ -947,7 +947,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                           margin: const EdgeInsets.only(bottom: 14),
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1E293B),
+                            color: const Color(0xFF18181B),
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(color: statusColor.withValues(alpha: 0.3)),
                           ),
@@ -1162,7 +1162,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                     margin: const EdgeInsets.only(bottom: 10),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B),
+                      color: const Color(0xFF18181B),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
                     ),
@@ -1244,7 +1244,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   labelStyle: const TextStyle(color: Colors.grey),
                   prefixIcon: const Icon(Icons.person_outline, color: Colors.blueAccent, size: 18),
                   filled: true,
-                  fillColor: const Color(0xFF1E293B),
+                  fillColor: const Color(0xFF18181B),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 ),
               ),
@@ -1258,7 +1258,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   labelStyle: const TextStyle(color: Colors.grey),
                   prefixIcon: const Icon(Icons.phone_android_outlined, color: Colors.blueAccent, size: 18),
                   filled: true,
-                  fillColor: const Color(0xFF1E293B),
+                  fillColor: const Color(0xFF18181B),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 ),
               ),
@@ -1271,7 +1271,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   labelStyle: const TextStyle(color: Colors.grey),
                   prefixIcon: const Icon(Icons.place_outlined, color: Colors.blueAccent, size: 18),
                   filled: true,
-                  fillColor: const Color(0xFF1E293B),
+                  fillColor: const Color(0xFF18181B),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 ),
               ),
@@ -1284,7 +1284,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   labelStyle: const TextStyle(color: Colors.grey),
                   prefixIcon: const Icon(Icons.note_alt_outlined, color: Colors.blueAccent, size: 18),
                   filled: true,
-                  fillColor: const Color(0xFF1E293B),
+                  fillColor: const Color(0xFF18181B),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 ),
               ),
@@ -1300,21 +1300,21 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
               Row(
                 children: [
                   ChoiceChip(
-                    label: const Text('📱 Yape'),
+                    label: const Text('Yape'),
                     selected: _paymentMethod == 'yape',
                     selectedColor: Colors.purpleAccent,
                     onSelected: (_) => setState(() => _paymentMethod = 'yape'),
                   ),
                   const SizedBox(width: 8),
                   ChoiceChip(
-                    label: const Text('💳 Tarjeta'),
+                    label: const Text('Tarjeta'),
                     selected: _paymentMethod == 'card',
                     selectedColor: Colors.blueAccent,
                     onSelected: (_) => setState(() => _paymentMethod = 'card'),
                   ),
                   const SizedBox(width: 8),
                   ChoiceChip(
-                    label: const Text('💵 Efectivo'),
+                    label: const Text('Efectivo'),
                     selected: _paymentMethod == 'cash',
                     selectedColor: Colors.greenAccent,
                     onSelected: (_) => setState(() => _paymentMethod = 'cash'),
@@ -1329,7 +1329,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: const BoxDecoration(
-            color: Color(0xFF1E293B),
+            color: Color(0xFF18181B),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24),
               topRight: Radius.circular(24),
@@ -1402,7 +1402,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
+              colors: [Color(0xFF18181B), Color(0xFF09090B)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -1460,7 +1460,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
+                color: const Color(0xFF18181B),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
               ),
@@ -1508,7 +1508,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E293B),
+            color: const Color(0xFF18181B),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -1542,7 +1542,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         // Server Connection Status & Config
         ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          tileColor: const Color(0xFF1E293B),
+          tileColor: const Color(0xFF18181B),
           leading: const Icon(Icons.wifi, color: Colors.greenAccent),
           title: const Text('Estado de la Conexión', style: TextStyle(color: Colors.white, fontSize: 13)),
           subtitle: const Text('En línea • Sistema central sincronizado', style: TextStyle(color: Colors.grey, fontSize: 11)),
@@ -1563,7 +1563,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  backgroundColor: const Color(0xFF1E293B),
+                  backgroundColor: const Color(0xFF18181B),
                   title: const Text('¿Cerrar Sesión?', style: TextStyle(color: Colors.white)),
                   content: const Text('Regresarás a la pantalla de inicio de sesión.', style: TextStyle(color: Colors.grey)),
                   actions: [
@@ -1631,7 +1631,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E293B),
+                  color: const Color(0xFF18181B),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Colors.white12),
                 ),
@@ -1649,7 +1649,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E293B),
+            color: const Color(0xFF18181B),
             borderRadius: BorderRadius.circular(16),
           ),
           child: const Column(
@@ -1702,7 +1702,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E293B),
+            color: const Color(0xFF18181B),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -1726,7 +1726,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B),
+        color: const Color(0xFF18181B),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
@@ -1776,7 +1776,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         title: const Text('Configuración de Conexión', style: TextStyle(color: Colors.white, fontSize: 16)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1818,7 +1818,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('¿Cerrar Sesión?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         content: const Text(
@@ -1867,19 +1867,22 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         elevation: 0,
         title: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(6),
+              width: 32,
+              height: 32,
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFF18181B),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFF27272A)),
               ),
-              child: const Icon(Icons.build_circle_outlined, color: Colors.white, size: 20),
+              child: Image.asset('assets/images/logo_white.png', fit: BoxFit.contain),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -1966,7 +1969,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       // BOTTOM NAVIGATION BAR
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF1E293B),
+          color: Color(0xFF18181B),
           border: Border(top: BorderSide(color: Colors.white10, width: 1)),
         ),
         child: BottomNavigationBar(
@@ -1974,7 +1977,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
           onTap: (index) {
             setState(() => _currentTabIndex = index);
           },
-          backgroundColor: const Color(0xFF1E293B),
+          backgroundColor: const Color(0xFF18181B),
           selectedItemColor: Colors.blueAccent,
           unselectedItemColor: Colors.grey,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),

@@ -49,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
         context: context,
         barrierDismissible: false,
         builder: (_) => AlertDialog(
-          backgroundColor: const Color(0xFF1E293B),
+          backgroundColor: const Color(0xFF18181B),
           title: const Text('¡Pedido Confirmado!', style: TextStyle(color: Colors.white)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -93,9 +93,9 @@ class _CartScreenState extends State<CartScreen> {
     final cart = Provider.of<CartProvider>(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         title: const Text('Mi Carrito & Checkout'),
       ),
       body: cart.items.isEmpty
@@ -121,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                             margin: const EdgeInsets.only(bottom: 8),
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1E293B),
+                              color: const Color(0xFF18181B),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
@@ -171,7 +171,7 @@ class _CartScreenState extends State<CartScreen> {
                           labelText: 'Nombre Completo',
                           labelStyle: const TextStyle(color: Colors.grey),
                           filled: true,
-                          fillColor: const Color(0xFF1E293B),
+                          fillColor: const Color(0xFF18181B),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -183,7 +183,7 @@ class _CartScreenState extends State<CartScreen> {
                           labelText: 'Teléfono de contacto',
                           labelStyle: const TextStyle(color: Colors.grey),
                           filled: true,
-                          fillColor: const Color(0xFF1E293B),
+                          fillColor: const Color(0xFF18181B),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -195,7 +195,7 @@ class _CartScreenState extends State<CartScreen> {
                           labelText: 'Dirección de Entrega',
                           labelStyle: const TextStyle(color: Colors.grey),
                           filled: true,
-                          fillColor: const Color(0xFF1E293B),
+                          fillColor: const Color(0xFF18181B),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -211,21 +211,21 @@ class _CartScreenState extends State<CartScreen> {
                       Row(
                         children: [
                           ChoiceChip(
-                            label: const Text('📱 Yape'),
+                            label: const Text('Yape'),
                             selected: _paymentMethod == 'yape',
                             selectedColor: Colors.purpleAccent,
                             onSelected: (_) => setState(() => _paymentMethod = 'yape'),
                           ),
                           const SizedBox(width: 8),
                           ChoiceChip(
-                            label: const Text('💳 Tarjeta'),
+                            label: const Text('Tarjeta'),
                             selected: _paymentMethod == 'card',
                             selectedColor: Colors.blueAccent,
                             onSelected: (_) => setState(() => _paymentMethod = 'card'),
                           ),
                           const SizedBox(width: 8),
                           ChoiceChip(
-                            label: const Text('💵 Efectivo'),
+                            label: const Text('Efectivo'),
                             selected: _paymentMethod == 'cash',
                             selectedColor: Colors.greenAccent,
                             onSelected: (_) => setState(() => _paymentMethod = 'cash'),
@@ -240,7 +240,7 @@ class _CartScreenState extends State<CartScreen> {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF1E293B),
+                    color: Color(0xFF18181B),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),

@@ -26,14 +26,64 @@ class RinoDeliveryApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => TelemetryService()),
       ],
       child: MaterialApp(
-        title: 'Grupo Rino Delivery',
+        title: 'Grupo Rino E.I.R.L.',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.dark,
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: const Color(0xFF0F172A),
+          scaffoldBackgroundColor: const Color(0xFF09090B),
+          cardColor: const Color(0xFF18181B),
           useMaterial3: true,
           fontFamily: 'Roboto',
+          colorScheme: const ColorScheme.dark(
+            primary: Colors.white,
+            onPrimary: Color(0xFF09090B),
+            surface: Color(0xFF18181B),
+            onSurface: Color(0xFFFAFAFA),
+            outline: Color(0xFF27272A),
+          ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF09090B),
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.2,
+            ),
+          ),
+          cardTheme: const CardThemeData(
+            color: Color(0xFF18181B),
+            elevation: 0,
+            margin: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              side: BorderSide(color: Color(0xFF27272A)),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF09090B),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.white,
+              side: const BorderSide(color: Color(0xFF27272A)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
         ),
         home: const LoginScreen(),
       ),

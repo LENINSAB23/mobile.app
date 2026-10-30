@@ -31,8 +31,8 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
   String? _errorMessage;
 
   final List<String> _quickPrompts = [
-    '🛢️ ¿Qué aceite le hace a mi moto 150cc/200cc?',
-    '🛑 ¿Tienen pastillas de freno y discos en stock?',
+    '¿Qué aceite recomiendan para moto 150cc/200cc?',
+    '¿Tienen pastillas de freno y discos en stock?',
     '⚡ ¿Qué batería me recomiendan y cuál es su garantía?',
     '📦 ¿Cómo rastreo mi pedido por GPS en tiempo real?',
     '🔧 ¿Cómo saber la compatibilidad de una bujía NGK?',
@@ -182,7 +182,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         title: const Text('Eliminar conversación', style: TextStyle(color: Colors.white, fontSize: 16)),
         content: Text(
           '¿Estás seguro de eliminar "${conv.title}"?',
@@ -346,9 +346,9 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         elevation: 1,
         titleSpacing: 0,
         leading: IconButton(
@@ -358,16 +358,15 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
         title: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(7),
+              width: 32,
+              height: 32,
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF2563EB), Color(0xFF7C3AED)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(10),
+                color: const Color(0xFF18181B),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFF27272A)),
               ),
-              child: const Icon(Icons.auto_awesome, color: Colors.white, size: 18),
+              child: Image.asset('assets/images/logo_white.png', fit: BoxFit.contain),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -468,7 +467,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E293B),
+              color: const Color(0xFF18181B),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -495,7 +494,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              '💡 Consultas sugeridas:',
+              'Consultas sugeridas:',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white70),
             ),
           ),
@@ -513,7 +512,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E293B),
+                    color: const Color(0xFF18181B),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: const Color(0xFF334155)),
                   ),
@@ -579,7 +578,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
               decoration: BoxDecoration(
-                color: isUser ? const Color(0xFF2563EB) : const Color(0xFF1E293B),
+                color: isUser ? const Color(0xFF2563EB) : const Color(0xFF18181B),
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(16),
                   topRight: const Radius.circular(16),
@@ -676,7 +675,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E293B),
+              color: const Color(0xFF18181B),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: const Color(0xFF334155)),
             ),
@@ -705,7 +704,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: const BoxDecoration(
-        color: Color(0xFF1E293B),
+        color: Color(0xFF18181B),
         border: Border(top: BorderSide(color: Color(0xFF334155), width: 1)),
       ),
       child: Row(
@@ -714,7 +713,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF09090B),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: const Color(0xFF334155)),
               ),
@@ -753,14 +752,14 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
 
   Widget _buildConversationsDrawer() {
     return Drawer(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       child: SafeArea(
         child: Column(
           children: [
             Container(
               padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
-                color: Color(0xFF1E293B),
+                color: Color(0xFF18181B),
                 border: Border(bottom: BorderSide(color: Color(0xFF334155))),
               ),
               child: Row(
@@ -802,7 +801,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
                       : ListView.separated(
                           padding: const EdgeInsets.all(10),
                           itemCount: _conversations.length,
-                          separatorBuilder: (context, index) => const Divider(color: Color(0xFF1E293B), height: 1),
+                          separatorBuilder: (context, index) => const Divider(color: Color(0xFF18181B), height: 1),
                           itemBuilder: (ctx, idx) {
                             final conv = _conversations[idx];
                             final isSelected = conv.id == _currentConversation?.id;
@@ -812,7 +811,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
 
                             return ListTile(
                               selected: isSelected,
-                              selectedTileColor: const Color(0xFF1E293B),
+                              selectedTileColor: const Color(0xFF18181B),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               leading: Icon(
                                 Icons.chat,

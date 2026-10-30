@@ -93,7 +93,7 @@ class TelemetryService extends ChangeNotifier {
         _currentLng = lastPos.longitude;
         _currentSpeed = (lastPos.speed * 3.6).clamp(0.0, 160.0);
         _hasRealGpsFix = true;
-        _addLog('📍 GPS instantáneo: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
+        _addLog('GPS instantáneo: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
         notifyListeners();
       }
 
@@ -111,7 +111,7 @@ class TelemetryService extends ChangeNotifier {
         _currentSpeed = (position.speed * 3.6).clamp(0.0, 160.0);
         _currentAltitude = position.altitude;
         _hasRealGpsFix = true;
-        _addLog('📍 GPS Satelital Real fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
+        _addLog('GPS Satelital Real fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
         notifyListeners();
         return position;
       }
@@ -130,7 +130,7 @@ class TelemetryService extends ChangeNotifier {
           _currentSpeed = (position.speed * 3.6).clamp(0.0, 160.0);
           _currentAltitude = position.altitude;
           _hasRealGpsFix = true;
-          _addLog('📍 GPS Red/Wi-Fi fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
+          _addLog('GPS Red/Wi-Fi fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
           notifyListeners();
           return position;
         }

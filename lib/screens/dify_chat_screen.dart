@@ -16,12 +16,12 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
   bool _isLoading = false;
 
   final List<String> _quickPrompts = [
-    '🛢️ ¿Qué aceite le hace a mi auto/moto?',
-    '🛑 ¿Tienen pastillas de freno y discos?',
+    '¿Qué viscosidad de aceite requiere mi vehículo?',
+    '¿Tienen pastillas de freno y discos?',
     '⚡ ¿Qué batería me recomiendan?',
-    '📦 ¿Cómo rastreo mi pedido por GPS?',
-    '🔧 ¿Qué funciones tiene el escáner OBD2?',
-    '🤖 ¿Cómo funciona la predicción de ETA por IA?',
+    '¿Cómo rastreo el despacho por GPS en vivo?',
+    '¿Qué funciones de diagnóstico incluye el escáner OBD2?',
+    '¿Cómo funciona la estimación de llegada ETA por IA?',
   ];
 
   @override
@@ -42,7 +42,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
     _messages.add(
       DifyChatMessage(
         id: 'msg_welcome',
-        text: '¡Hola! Soy **RinoBot**, tu Asistente Técnico de **Grupo Rino E.I.R.L.** 🚗🏍️\n\n'
+        text: 'Bienvenido al Asistente Técnico Oficial de **Grupo Rino E.I.R.L.**\n\n'
             'Puedo asesorarte en repuestos de autos y motocicletas, compatibilidad de piezas, consulta de pedidos con rastreo en vivo y cotizaciones en Huánuco.\n\n'
             '${hasKey ? "🟢 *Asistente Inteligente Conectado y Listo*" : "⚙️ *Modo Asistente Activo.*"}\n\n'
             '¿En qué te puedo ayudar hoy?',
@@ -126,7 +126,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         title: const Row(
           children: [
@@ -152,7 +152,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                   hintText: 'https://api.dify.ai/v1',
                   hintStyle: const TextStyle(color: Colors.grey),
                   filled: true,
-                  fillColor: const Color(0xFF0F172A),
+                  fillColor: const Color(0xFF09090B),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -170,7 +170,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                   hintText: 'app-xxxxxxxxxxxxxxxxxxxxxxxx',
                   hintStyle: const TextStyle(color: Colors.grey),
                   filled: true,
-                  fillColor: const Color(0xFF0F172A),
+                  fillColor: const Color(0xFF09090B),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -183,7 +183,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                   border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
                 ),
                 child: const Text(
-                  '💡 Consigue tu clave en: Dify Console > Tu App > Menú Lateral "Acceso a la API" > "Claves API".',
+                  'Consigue tu clave en: Dify Console > Tu App > Menú Lateral "Acceso a la API" > "Claves API".',
                   style: TextStyle(color: Colors.white70, fontSize: 11),
                 ),
               ),
@@ -223,9 +223,9 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         elevation: 2,
         title: Row(
           children: [
@@ -235,7 +235,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                 color: Colors.blueAccent.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.smart_toy, color: Colors.blueAccent, size: 22),
+              child: Image.asset('assets/images/logo_white.png', width: 22, height: 22, fit: BoxFit.contain),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -317,7 +317,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                   child: Text(
                     ApiConfig.hasDifyApiKey
                         ? 'Agente Dify activo en ${ApiConfig.difyBaseUrl}'
-                        : 'Modo Asistente Local. Presiona 🔑 arriba para enlazar tu API Key de Dify.',
+                        : 'Modo Asistente Local. Presiona la llave de configuración arriba para enlazar tu API Key de Dify.',
                     style: TextStyle(
                       color: ApiConfig.hasDifyApiKey ? Colors.greenAccent : Colors.orangeAccent,
                       fontSize: 11,
@@ -349,7 +349,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E293B),
+                  color: const Color(0xFF18181B),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: const Row(
@@ -382,7 +382,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
               itemBuilder: (context, idx) {
                 final prompt = _quickPrompts[idx];
                 return ActionChip(
-                  backgroundColor: const Color(0xFF1E293B),
+                  backgroundColor: const Color(0xFF18181B),
                   side: BorderSide(color: Colors.blueAccent.withValues(alpha: 0.3)),
                   label: Text(
                     prompt,
@@ -398,7 +398,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: const BoxDecoration(
-              color: Color(0xFF1E293B),
+              color: Color(0xFF18181B),
               border: Border(top: BorderSide(color: Colors.white10, width: 1)),
             ),
             child: SafeArea(
@@ -415,7 +415,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                         hintText: 'Escribe tu consulta sobre repuestos...',
                         hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
                         filled: true,
-                        fillColor: const Color(0xFF0F172A),
+                        fillColor: const Color(0xFF09090B),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
@@ -512,7 +512,7 @@ class _DifyChatScreenState extends State<DifyChatScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   decoration: BoxDecoration(
-                    color: msg.isError ? const Color(0xFF450A0A) : const Color(0xFF1E293B),
+                    color: msg.isError ? const Color(0xFF450A0A) : const Color(0xFF18181B),
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(4),
                       topRight: Radius.circular(16),

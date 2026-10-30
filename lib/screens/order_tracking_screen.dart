@@ -194,9 +194,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: const Color(0xFF09090B),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF18181B),
         elevation: 0,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,7 +315,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                             angle: (_vehicleHeading - 90) * math.pi / 180.0,
                             child: Container(
                               decoration: BoxDecoration(
-                                color: const Color(0xFF1E293B),
+                                color: const Color(0xFF18181B),
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.blueAccent, width: 3),
                                 boxShadow: [
@@ -345,7 +345,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                   right: 16,
                   child: FloatingActionButton.small(
                     heroTag: 'recenter_driver',
-                    backgroundColor: const Color(0xFF1E293B),
+                    backgroundColor: const Color(0xFF18181B),
                     onPressed: () {
                       _mapController.move(_driverLatLng, 17.0);
                     },
@@ -361,7 +361,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B).withValues(alpha: 0.96),
+                      color: const Color(0xFF18181B).withValues(alpha: 0.96),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
                       boxShadow: const [
@@ -480,7 +480,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
 
   String _getStatusLabel(String status) {
     switch (status) {
-      case 'in_transit': return 'En Ruta de Entrega 🛵';
+      case 'in_transit': return 'En Ruta de Entrega';
       case 'cooking':
       case 'preparing': return 'Alistando Repuesto en Taller 🛠️';
       case 'delivered': return '¡Repuestos Entregados! 🎉';
