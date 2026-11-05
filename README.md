@@ -14,7 +14,7 @@ La solución articula:
 - Un **servidor central API RESTful (Laravel 11)** que gestiona la persistencia transaccional (MySQL), autenticación segura (Sanctum) y orquestación de servicios.
 - Un **subsistema de Inteligencia Artificial híbrido**:
   1. Microservicio de Machine Learning en **Python (Scikit-learn)** para el cálculo dinámico del tiempo estimado de llegada (ETA).
-  2. Asistente técnico conversacional **RinoBot (Dify AI / Google Gemini)** con guardrails de restricción de dominio automotriz estricta.
+  2. Asistente técnico conversacional **RinoBot (Google Gemini)** con guardrails de restricción de dominio automotriz estricta.
 
 ---
 
@@ -67,7 +67,7 @@ A continuación se detallan las tecnologías y librerías utilizadas, junto con 
 | Subsistema | Tecnología | Función |
 | :--- | :--- | :--- |
 | **Predictor de ETA (Tiempo Estimado de Llegada)** | Python / FastAPI / Scikit-learn (`ai-services`) | Modelo de regresión lineal multivariable entrenado para calcular el tiempo real de despacho urbano evaluando: distancia kilométrica, hora punta de congestión vehicular en Huánuco y velocidad media del repartidor. |
-| **Asistente Técnico RinoBot** | Dify AI / Google Gemini 2.5 Flash | Agente conversacional que asiste a los usuarios en la compatibilidad de aceites, bujías, frenos y estado de sus pedidos. Dispone de **Guardrails de Restricción de Dominio**: si el usuario consulta temas ajenos al rubro automotriz de Grupo Rino, el agente declina la respuesta de forma estricta. |
+| **Asistente Técnico RinoBot** | Google Gemini (Gemini API) | Agente conversacional que asiste a los usuarios en la compatibilidad de aceites, bujías, frenos y estado de sus pedidos. Dispone de **Guardrails de Restricción de Dominio**: si el usuario consulta temas ajenos al rubro automotriz de Grupo Rino, el agente declina la respuesta de forma estricta. |
 
 ---
 
@@ -102,7 +102,7 @@ A continuación se detallan las tecnologías y librerías utilizadas, junto con 
 |   [ MySQL 8.x - Laragon ]   |     |   [ Microservicio ETA (Python / FastAPI) ]    |
 |    - Tablas de Usuarios     |     |    - Modelo Scikit-Learn de regresión temporal|
 |    - Tabla de Productos     |     |                                               |
-|    - Tabla de Pedidos       |     |   [ Agente RinoBot (Dify / Gemini API) ]      |
+|    - Tabla de Pedidos       |     |   [ Agente RinoBot (Google Gemini API) ]      |
 |    - Coordenadas GPS (Logs) |     |    - Restricción estricta de dominio          |
 +-----------------------------+     +-----------------------------------------------+
 ```
@@ -133,7 +133,7 @@ A continuación se detallan las tecnologías y librerías utilizadas, junto con 
   2. Domicilio o taller del cliente.
 - **Estimación Predictiva (ETA)**: Muestra el tiempo restante estimado calculado por el microservicio de IA, adaptándose a las condiciones de tránsito local.
 
-### 4.5 Módulo de Asistencia Técnica Inteligente (`GeminiChatScreen` & `DifyChatScreen`)
+### 4.5 Módulo de Asistencia Técnica Inteligente (`GeminiChatScreen`)
 - **Asesoría de Lubricación**: Asiste al usuario en la elección del aceite correcto según el año, kilometraje y fabricante del motor.
 - **Guardrail de Seguridad**: Algoritmo que filtra cualquier consulta ajena al catálogo automotriz para evitar el uso indebido de la API.
 
@@ -169,8 +169,7 @@ mobile_app/
 │   │   ├── home_customer_screen.dart     # Catálogo, carrito, órdenes y perfil
 │   │   ├── driver_dashboard_screen.dart  # Panel de despacho y telemetría
 │   │   ├── order_tracking_screen.dart    # Rastreo satelital en vivo con mapa
-│   │   ├── gemini_chat_screen.dart       # Asistente IA RinoBot (Gemini)
-│   │   └── dify_chat_screen.dart         # Asistente IA RinoBot (Dify)
+│   │   └── gemini_chat_screen.dart       # Asistente IA RinoBot (Google Gemini)
 │   ├── services/                # Servicios de red, GPS y telemetría
 │   └── main.dart                # Punto de entrada y configuración de tema minimalista
 ├── pubspec.yaml                 # Dependencias y registro de assets

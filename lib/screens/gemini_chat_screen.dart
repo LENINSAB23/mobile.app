@@ -33,10 +33,10 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
   final List<String> _quickPrompts = [
     '¿Qué aceite recomiendan para moto 150cc/200cc?',
     '¿Tienen pastillas de freno y discos en stock?',
-    '⚡ ¿Qué batería me recomiendan y cuál es su garantía?',
-    '📦 ¿Cómo rastreo mi pedido por GPS en tiempo real?',
-    '🔧 ¿Cómo saber la compatibilidad de una bujía NGK?',
-    '🛵 ¿Hacen envíos rápidos a todo Huánuco?',
+    '¿Qué batería me recomiendan y cuál es su garantía?',
+    '¿Cómo rastreo mi pedido por GPS en tiempo real?',
+    '¿Cómo saber la compatibilidad de una bujía NGK?',
+    '¿Hacen envíos rápidos a todo Huánuco?',
   ];
 
   @override

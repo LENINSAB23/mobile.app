@@ -160,7 +160,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       description: 'Máximo confort y estabilidad en curvas y baches para suspensión delantera de autos.',
       price: 320.00,
       prepTimeMinutes: 20,
-      imageUrl: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500',
+      imageUrl: 'https://images.unsplash.com/photo-1600793575654-910699b5e4d4?w=500',
     ),
     ProductModel(
       id: 9,
@@ -169,7 +169,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       description: 'Transmisión suave y duradera con acople preciso sin patinar. Calidad de equipo original.',
       price: 380.00,
       prepTimeMinutes: 25,
-      imageUrl: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500',
+      imageUrl: 'https://images.unsplash.com/photo-1600793575654-910699b5e4d4?w=500',
     ),
     // Repuestos Motos
     ProductModel(
@@ -197,7 +197,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       description: 'Batería sellada libre de mantenimiento, resistente a vibraciones continuas en motos y trimóviles.',
       price: 115.00,
       prepTimeMinutes: 10,
-      imageUrl: 'https://images.unsplash.com/photo-1597762127827-0242a8b34015?w=500',
+      imageUrl: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=500',
     ),
     ProductModel(
       id: 13,
@@ -216,7 +216,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       description: '12V 65Ah con alta potencia de arranque en frío. 18 meses de garantía para autos y camionetas.',
       price: 280.00,
       prepTimeMinutes: 15,
-      imageUrl: 'https://images.unsplash.com/photo-1597762127827-0242a8b34015?w=500',
+      imageUrl: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=500',
     ),
     ProductModel(
       id: 15,
@@ -244,7 +244,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       description: 'Chasis de acero extra reforzado con maletín transportable para auxilio mecánico.',
       price: 195.00,
       prepTimeMinutes: 15,
-      imageUrl: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500',
+      imageUrl: 'https://images.unsplash.com/photo-1600793575654-910699b5e4d4?w=500',
     ),
     ProductModel(
       id: 18,
