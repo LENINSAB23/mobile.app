@@ -54,20 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _enterDemoMode() async {
-    final auth = Provider.of<AuthProvider>(context, listen: false);
-    await auth.loginAsDemo(_selectedRole);
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Iniciando en Modo Demostración'),
-        backgroundColor: Color(0xFF27272A),
-        duration: Duration(seconds: 2),
-      ),
-    );
-    _navigateToRoleScreen();
-  }
-
   void _handleLogin() async {
     final auth = Provider.of<AuthProvider>(context, listen: false);
     final success = await auth.login(
@@ -91,25 +77,20 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           title: const Row(
             children: [
-              Icon(Icons.cloud_off_outlined, color: Colors.white70, size: 20),
+              Icon(Icons.error_outline, color: Colors.white70, size: 20),
               SizedBox(width: 8),
               Expanded(
-                child: Text('Servidor no disponible', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+                child: Text('Error de Autenticación', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
               ),
             ],
           ),
-          content: const Column(
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'No se pudo conectar con la API central en este momento.',
-                style: TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Puedes ingresar en Modo Demostración para acceder al catálogo, pedidos y navegación.',
-                style: TextStyle(color: Color(0xFF71717A), fontSize: 12),
+                auth.errorMessage ?? 'No se pudo iniciar sesión. Verifique sus credenciales o la conectividad con el servidor central.',
+                style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
               ),
             ],
           ),
@@ -119,18 +100,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 Navigator.pop(ctx);
                 _showServerIpDialog();
               },
-              child: const Text('Ajustes de Red', style: TextStyle(color: Color(0xFFA1A1AA))),
+              child: const Text('Ajustes de Servidor', style: TextStyle(color: Color(0xFFA1A1AA))),
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(ctx);
-                _enterDemoMode();
-              },
+              onPressed: () => Navigator.pop(ctx),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF09090B),
               ),
-              child: const Text('Modo Demo', style: TextStyle(fontWeight: FontWeight.w600)),
+              child: const Text('Aceptar', style: TextStyle(fontWeight: FontWeight.w600)),
             ),
           ],
         ),
@@ -466,28 +444,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             'Iniciar Sesión',
                             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                           ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                // Botón Modo Demostración
-                SizedBox(
-                  width: double.infinity,
-                  height: 44,
-                  child: OutlinedButton(
-                    onPressed: _enterDemoMode,
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Color(0xFF27272A)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    child: const Text(
-                      'Modo Demostración (Offline)',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFA1A1AA),
-                      ),
-                    ),
                   ),
                 ),
                 const SizedBox(height: 24),

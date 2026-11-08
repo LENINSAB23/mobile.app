@@ -402,7 +402,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                                   ),
                                   const SizedBox(height: 3),
                                   Text(
-                                    '🛣️ $_currentStreet',
+                                    _currentStreet,
                                     style: const TextStyle(color: Colors.blueAccent, fontSize: 12, fontWeight: FontWeight.w600),
                                   ),
                                   Text(
@@ -482,9 +482,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
     switch (status) {
       case 'in_transit': return 'En Ruta de Entrega';
       case 'cooking':
-      case 'preparing': return 'Alistando Repuesto en Taller 🛠️';
-      case 'delivered': return '¡Repuestos Entregados! 🎉';
-      default: return 'Pendiente de Atención 🕒';
+      case 'preparing': return 'Alistando Repuesto en Taller';
+      case 'delivered': return 'Repuestos Entregados';
+      default: return 'Pendiente de Atención';
     }
   }
 }

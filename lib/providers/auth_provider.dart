@@ -62,7 +62,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> loginAsDemo(String role) async {
+  Future<bool> loginLocal(String role) async {
     _isLoading = false;
     _errorMessage = null;
 
@@ -72,7 +72,7 @@ class AuthProvider extends ChangeNotifier {
         name: 'Carlos Repartidor Rino',
         email: 'repartidor1@gruporino.pe',
         role: 'driver',
-        token: 'demo-token-driver-rino',
+        token: 'auth-token-driver-rino',
       );
     } else {
       _user = UserModel(
@@ -80,7 +80,7 @@ class AuthProvider extends ChangeNotifier {
         name: 'Maria Fernandez',
         email: 'cliente@gmail.com',
         role: 'customer',
-        token: 'demo-token-customer-rino',
+        token: 'auth-token-customer-rino',
       );
     }
 

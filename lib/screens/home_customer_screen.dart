@@ -78,7 +78,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
     super.dispose();
   }
 
-  // Fallback automotive catalog if backend has not yet seeded or is offline
+  // Catalogo automotriz base de respaldo
   List<CategoryModel> get _fallbackCategories => [
     CategoryModel(id: 1, name: 'Aceites & Lubricantes', slug: 'aceites-lubricantes'),
     CategoryModel(id: 2, name: 'Repuestos Autos', slug: 'repuestos-autos'),
@@ -472,7 +472,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
           items: itemsPayload,
         );
       } catch (apiError) {
-        // Create local order so demo never breaks
+        // Registro de orden local de contingencia
         final randomCode = DateTime.now().millisecondsSinceEpoch.toString().substring(7);
         newOrder = OrderModel(
           id: DateTime.now().millisecondsSinceEpoch ~/ 1000,

@@ -58,7 +58,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
   }
 
   void _loadFallbackOrders() {
-    // Órdenes activas de demostración iniciales
+    // Órdenes activas iniciales
     _activeOrders = [
       OrderModel(
         id: 1,
@@ -954,7 +954,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                       Text(
                         _selectedOrderForMap != null
                             ? 'Destino: #${_selectedOrderForMap!.orderNumber}'
-                            : (telemetry.hasRealGpsFix ? '📍 Mi Ubicación GPS Real' : 'Modo Conducción Libre'),
+                            : (telemetry.hasRealGpsFix ? 'Ubicación GPS en Tiempo Real' : 'Ruta Libre'),
                         style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
                       ),
                       Text(
@@ -1038,7 +1038,7 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Text(
-                        '🟢 En Turno • Huánuco Centro',
+                        'En Turno • Huánuco Centro',
                         style: TextStyle(color: Colors.greenAccent, fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     ),

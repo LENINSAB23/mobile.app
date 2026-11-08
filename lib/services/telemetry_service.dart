@@ -149,7 +149,7 @@ class TelemetryService extends ChangeNotifier {
     await fetchRealGpsLocation(promptSettings: true);
 
     _isTracking = true;
-    _addLog('🟢 Rastreo GPS en tiempo real INICIADO.');
+    _addLog('Rastreo GPS en tiempo real INICIADO.');
     notifyListeners();
 
     // Iniciar escucha continua de hardware GPS (Stream en tiempo real)
@@ -193,7 +193,7 @@ class TelemetryService extends ChangeNotifier {
     _timer?.cancel();
     _timer = null;
     _isTracking = false;
-    _addLog('🔴 Rastreo GPS DETENIDO.');
+    _addLog('Rastreo GPS DETENIDO.');
     notifyListeners();
   }
 
