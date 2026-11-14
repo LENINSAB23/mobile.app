@@ -6,6 +6,7 @@ import '../models/product.dart';
 import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
 import '../providers/order_provider.dart';
+import '../providers/theme_provider.dart';
 import '../services/api_service.dart';
 import '../config/api_config.dart';
 import 'order_tracking_screen.dart';
@@ -1542,13 +1543,64 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
         // Server Connection Status & Config
         ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          tileColor: const Color(0xFF18181B),
+          tileColor: Theme.of(context).cardColor,
           leading: const Icon(Icons.wifi, color: Colors.greenAccent),
-          title: const Text('Estado de la Conexión', style: TextStyle(color: Colors.white, fontSize: 13)),
+          title: Text(
+            'Estado de la Conexión',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontSize: 13,
+            ),
+          ),
           subtitle: const Text('En línea • Sistema central sincronizado', style: TextStyle(color: Colors.grey, fontSize: 11)),
           trailing: const Icon(Icons.chevron_right, color: Colors.grey),
           onTap: () {
             _showServerConfigDialog();
+          },
+        ),
+
+        const SizedBox(height: 12),
+
+        // Visual Theme Selector Tile
+        Consumer<ThemeProvider>(
+          builder: (context, theme, _) {
+            final isDark = theme.isDarkMode;
+            return ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  color: isDark ? const Color(0xFF27272A) : const Color(0xFFE2E8F0),
+                ),
+              ),
+              tileColor: Theme.of(context).cardColor,
+              leading: Icon(
+                isDark ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+                color: isDark ? Colors.white : const Color(0xFF09090B),
+              ),
+              title: Text(
+                'Tema Visual',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              subtitle: Text(
+                isDark ? 'Modo Oscuro' : 'Modo Claro',
+                style: TextStyle(
+                  color: isDark ? const Color(0xFFA1A1AA) : const Color(0xFF64748B),
+                  fontSize: 11,
+                ),
+              ),
+              trailing: Switch(
+                value: isDark,
+                activeThumbColor: Colors.white,
+                activeTrackColor: const Color(0xFF3F3F46),
+                inactiveThumbColor: const Color(0xFF09090B),
+                inactiveTrackColor: const Color(0xFFE2E8F0),
+                onChanged: (_) => theme.toggleTheme(),
+              ),
+            );
           },
         ),
 
@@ -1866,10 +1918,13 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
       default: appBarTitle = 'Grupo Rino E.I.R.L.';
     }
 
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkMode;
+
     return Scaffold(
-      backgroundColor: const Color(0xFF09090B),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF18181B),
+        backgroundColor: isDark ? const Color(0xFF18181B) : Colors.white,
         elevation: 0,
         title: Row(
           children: [
@@ -1878,11 +1933,16 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
               height: 32,
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: const Color(0xFF18181B),
+                color: isDark ? const Color(0xFF18181B) : Colors.white,
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFF27272A)),
+                border: Border.all(
+                  color: isDark ? const Color(0xFF27272A) : const Color(0xFFE2E8F0),
+                ),
               ),
-              child: Image.asset('assets/images/logo_white.png', fit: BoxFit.contain),
+              child: Image.asset(
+                isDark ? 'assets/images/logo_white.png' : 'assets/images/logo.png',
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -1892,11 +1952,18 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   Text(
                     appBarTitle,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: isDark ? Colors.white : const Color(0xFF09090B),
+                    ),
                   ),
-                  const Text(
+                  Text(
                     'Refacciones Auto/Moto & Mecánica',
-                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: isDark ? Colors.grey : const Color(0xFF64748B),
+                    ),
                   ),
                 ],
               ),
@@ -1904,6 +1971,15 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
           ],
         ),
         actions: [
+          // Theme Toggle Button
+          IconButton(
+            icon: Icon(
+              isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+              color: isDark ? const Color(0xFFA1A1AA) : const Color(0xFF64748B),
+            ),
+            tooltip: isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro',
+            onPressed: () => themeProvider.toggleTheme(),
+          ),
           // Gemini AI Assistant shortcut
           IconButton(
             icon: const Icon(Icons.auto_awesome, color: Color(0xFF60A5FA)),
@@ -1968,18 +2044,23 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
 
       // BOTTOM NAVIGATION BAR
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF18181B),
-          border: Border(top: BorderSide(color: Colors.white10, width: 1)),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF18181B) : Colors.white,
+          border: Border(
+            top: BorderSide(
+              color: isDark ? const Color(0xFF27272A) : const Color(0xFFE2E8F0),
+              width: 1,
+            ),
+          ),
         ),
         child: BottomNavigationBar(
           currentIndex: _currentTabIndex,
           onTap: (index) {
             setState(() => _currentTabIndex = index);
           },
-          backgroundColor: const Color(0xFF18181B),
-          selectedItemColor: Colors.blueAccent,
-          unselectedItemColor: Colors.grey,
+          backgroundColor: isDark ? const Color(0xFF18181B) : Colors.white,
+          selectedItemColor: isDark ? Colors.white : const Color(0xFF09090B),
+          unselectedItemColor: isDark ? const Color(0xFF71717A) : const Color(0xFF94A3B8),
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
           unselectedLabelStyle: const TextStyle(fontSize: 10),
           type: BottomNavigationBarType.fixed,

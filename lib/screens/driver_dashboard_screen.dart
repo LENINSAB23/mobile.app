@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../config/api_config.dart';
 import '../models/order.dart';
 import '../providers/auth_provider.dart';
+import '../providers/theme_provider.dart';
 import '../services/api_service.dart';
 import '../services/routing_service.dart';
 import '../services/telemetry_service.dart';
@@ -1093,12 +1094,70 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
 
         const SizedBox(height: 14),
 
+        // Visual Theme Selector Tile
+        Consumer<ThemeProvider>(
+          builder: (context, theme, _) {
+            final isDark = theme.isDarkMode;
+            return ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  color: isDark ? const Color(0xFF27272A) : const Color(0xFFE2E8F0),
+                ),
+              ),
+              tileColor: Theme.of(context).cardColor,
+              leading: Icon(
+                isDark ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+                color: isDark ? Colors.white : const Color(0xFF09090B),
+              ),
+              title: Text(
+                'Tema Visual',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              subtitle: Text(
+                isDark ? 'Modo Oscuro' : 'Modo Claro',
+                style: TextStyle(
+                  color: isDark ? const Color(0xFFA1A1AA) : const Color(0xFF64748B),
+                  fontSize: 11,
+                ),
+              ),
+              trailing: Switch(
+                value: isDark,
+                activeThumbColor: Colors.white,
+                activeTrackColor: const Color(0xFF3F3F46),
+                inactiveThumbColor: const Color(0xFF09090B),
+                inactiveTrackColor: const Color(0xFFE2E8F0),
+                onChanged: (_) => theme.toggleTheme(),
+              ),
+            );
+          },
+        ),
+
+        const SizedBox(height: 14),
+
         // Server Configuration Tile
         ListTile(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          tileColor: const Color(0xFF18181B),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFF27272A)
+                  : const Color(0xFFE2E8F0),
+            ),
+          ),
+          tileColor: Theme.of(context).cardColor,
           leading: const Icon(Icons.wifi, color: Colors.blueAccent),
-          title: const Text('Configuración de Conexión', style: TextStyle(color: Colors.white, fontSize: 13)),
+          title: Text(
+            'Configuración de Conexión',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontSize: 13,
+            ),
+          ),
           subtitle: const Text('Ajustes de red y sincronización', style: TextStyle(color: Colors.grey, fontSize: 11)),
           trailing: const Icon(Icons.chevron_right, color: Colors.grey),
           onTap: () {
@@ -1181,6 +1240,9 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkMode;
+
     String appBarTitle;
     switch (_currentTabIndex) {
       case 0: appBarTitle = 'Panel de Despacho (Pedidos)'; break;
@@ -1191,9 +1253,9 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF09090B),
+      backgroundColor: isDark ? const Color(0xFF09090B) : const Color(0xFFF8FAFC),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF18181B),
+        backgroundColor: isDark ? const Color(0xFF18181B) : Colors.white,
         elevation: 0,
         title: Row(
           children: [
@@ -1202,23 +1264,40 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               height: 30,
               padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: const Color(0xFF18181B),
+                color: isDark ? const Color(0xFF18181B) : const Color(0xFFF4F4F5),
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFF27272A)),
+                border: Border.all(
+                  color: isDark ? const Color(0xFF27272A) : const Color(0xFFE2E8F0),
+                ),
               ),
-              child: Image.asset('assets/images/logo_white.png', fit: BoxFit.contain),
+              child: Image.asset(
+                isDark ? 'assets/images/logo_white.png' : 'assets/images/logo.png',
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
                 appBarTitle,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : const Color(0xFF09090B),
+                ),
               ),
             ),
           ],
         ),
         actions: [
+          IconButton(
+            icon: Icon(
+              isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+              color: isDark ? const Color(0xFFA1A1AA) : const Color(0xFF64748B),
+            ),
+            tooltip: isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro',
+            onPressed: () => themeProvider.toggleTheme(),
+          ),
           IconButton(
             icon: const Icon(Icons.auto_awesome, color: Color(0xFF60A5FA)),
             tooltip: 'Asistente IA (Gemini)',
@@ -1250,9 +1329,14 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
 
       // BARRA INFERIOR (BOTTOM NAVIGATION BAR)
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF18181B),
-          border: Border(top: BorderSide(color: Colors.white10, width: 1)),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF18181B) : Colors.white,
+          border: Border(
+            top: BorderSide(
+              color: isDark ? const Color(0xFF27272A) : const Color(0xFFE2E8F0),
+              width: 1,
+            ),
+          ),
         ),
         child: BottomNavigationBar(
           currentIndex: _currentTabIndex,
@@ -1267,13 +1351,13 @@ class _DriverDashboardScreenState extends State<DriverDashboardScreen> {
               });
             }
           },
-          backgroundColor: const Color(0xFF18181B),
-          selectedItemColor: Colors.orangeAccent,
-          unselectedItemColor: Colors.grey,
+          backgroundColor: isDark ? const Color(0xFF18181B) : Colors.white,
+          selectedItemColor: isDark ? Colors.white : const Color(0xFF09090B),
+          unselectedItemColor: isDark ? const Color(0xFF71717A) : const Color(0xFF94A3B8),
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
           unselectedLabelStyle: const TextStyle(fontSize: 10),
           type: BottomNavigationBarType.fixed,
-          elevation: 8,
+          elevation: 0,
           items: [
             BottomNavigationBarItem(
               icon: Badge(

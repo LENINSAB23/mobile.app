@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
+
 import '../config/api_config.dart';
 
 class TelemetryService extends ChangeNotifier {
@@ -22,7 +24,10 @@ class TelemetryService extends ChangeNotifier {
     const LatLng(-9.9325, -76.2405), // Jr. General Prado & Aguilar
     const LatLng(-9.9330, -76.2400), // Jr. General Prado (Cdra 5)
     const LatLng(-9.9338, -76.2393), // Jr. General Prado & Ayacucho
-    const LatLng(-9.9330, -76.2385), // Jr. Dos de Mayo & Ayacucho (Giro en esquina)
+    const LatLng(
+      -9.9330,
+      -76.2385,
+    ), // Jr. Dos de Mayo & Ayacucho (Giro en esquina)
     const LatLng(-9.9322, -76.2393), // Jr. Dos de Mayo & Aguilar
     const LatLng(-9.9313, -76.2401), // Jr. Dos de Mayo & Dámaso Beraún
     const LatLng(-9.9303, -76.2410), // Jr. Dos de Mayo & 28 de Julio
@@ -93,7 +98,9 @@ class TelemetryService extends ChangeNotifier {
         _currentLng = lastPos.longitude;
         _currentSpeed = (lastPos.speed * 3.6).clamp(0.0, 160.0);
         _hasRealGpsFix = true;
-        _addLog('GPS instantáneo: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
+        _addLog(
+          'GPS instantáneo: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}',
+        );
         notifyListeners();
       }
 
@@ -111,7 +118,9 @@ class TelemetryService extends ChangeNotifier {
         _currentSpeed = (position.speed * 3.6).clamp(0.0, 160.0);
         _currentAltitude = position.altitude;
         _hasRealGpsFix = true;
-        _addLog('GPS Satelital Real fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
+        _addLog(
+          'GPS Satelital Real fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}',
+        );
         notifyListeners();
         return position;
       }
@@ -130,7 +139,9 @@ class TelemetryService extends ChangeNotifier {
           _currentSpeed = (position.speed * 3.6).clamp(0.0, 160.0);
           _currentAltitude = position.altitude;
           _hasRealGpsFix = true;
-          _addLog('GPS Red/Wi-Fi fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}');
+          _addLog(
+            'GPS Red/Wi-Fi fijado: ${_currentLat.toStringAsFixed(5)}, ${_currentLng.toStringAsFixed(5)}',
+          );
           notifyListeners();
           return position;
         }
@@ -159,20 +170,19 @@ class TelemetryService extends ChangeNotifier {
         distanceFilter: 2, // Emitir cada 2 metros
       );
       _positionStream?.cancel();
-      _positionStream = Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-        (Position pos) {
-          if (pos.latitude != 0 && pos.longitude != 0) {
-            _currentLat = pos.latitude;
-            _currentLng = pos.longitude;
-            _currentSpeed = (pos.speed * 3.6).clamp(0.0, 160.0);
-            _currentAltitude = pos.altitude;
-            _hasRealGpsFix = true;
-            notifyListeners();
-            _sendTelemetryPacket();
-          }
-        },
-        onError: (_) {},
-      );
+      _positionStream =
+          Geolocator.getPositionStream(locationSettings: locationSettings)
+              .listen((Position pos) {
+                if (pos.latitude != 0 && pos.longitude != 0) {
+                  _currentLat = pos.latitude;
+                  _currentLng = pos.longitude;
+                  _currentSpeed = (pos.speed * 3.6).clamp(0.0, 160.0);
+                  _currentAltitude = pos.altitude;
+                  _hasRealGpsFix = true;
+                  notifyListeners();
+                  _sendTelemetryPacket();
+                }
+              }, onError: (_) {});
     } catch (_) {}
 
     // Capturar y enviar inmediatamente
@@ -246,17 +256,29 @@ class TelemetryService extends ChangeNotifier {
         'recorded_at': DateTime.now().toIso8601String(),
       };
 
-      final response = await http.post(
-        Uri.parse('${ApiConfig.baseUrl}/telemetry/location'),
-        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-        body: jsonEncode(payload),
-      ).timeout(const Duration(seconds: 2));
+      final response = await http
+          .post(
+            Uri.parse('${ApiConfig.baseUrl}/telemetry/location'),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: jsonEncode(payload),
+          )
+          .timeout(const Duration(seconds: 2));
 
       if (response.statusCode == 201) {
-        final nowStr = DateTime.now().toString().split('.').first.split(' ').last;
-        _addLog('[$nowStr] Tx OK: ${_currentLat.toStringAsFixed(4)}, ${_currentLng.toStringAsFixed(4)} (${_currentSpeed.toStringAsFixed(1)} km/h)');
+        final nowStr = DateTime.now()
+            .toString()
+            .split('.')
+            .first
+            .split(' ')
+            .last;
+        _addLog(
+          '[$nowStr] Tx OK: ${_currentLat.toStringAsFixed(4)}, ${_currentLng.toStringAsFixed(4)} (${_currentSpeed.toStringAsFixed(1)} km/h)',
+        );
       } else {
-        _addLog('⚠️ Tx HTTP ${response.statusCode}');
+        _addLog('[ERROR] Tx HTTP ${response.statusCode}');
       }
     } catch (e) {
       // Silencioso para no saturar si backend está en standby
