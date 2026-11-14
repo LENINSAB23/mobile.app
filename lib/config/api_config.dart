@@ -1,12 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiConfig {
-  // IP local actual de la PC en la red WiFi (detectada: 10.212.84.82)
-  static const String detectedLocalIp = '10.212.84.82';
   static const String usbAdbIp = '127.0.0.1';
+  static const String detectedLocalIp = '10.212.84.82';
   static const String emulatorIp = '10.0.2.2';
 
-  static String _serverIp = detectedLocalIp;
+  static String _serverIp = usbAdbIp;
   static String _serverPort = '8000';
 
   static String get baseUrl => 'http://$_serverIp:$_serverPort/api';
@@ -17,13 +16,14 @@ class ApiConfig {
     final prefs = await SharedPreferences.getInstance();
     final savedIp = prefs.getString('server_ip');
     
-    // Si no hay IP o tiene una IP obsoleta anterior, actualizar a la IP actual
+    // En dispositivo físico con depuración USB, 127.0.0.1 es el destino de adb reverse
     if (savedIp == null ||
+        savedIp == '10.0.2.2' ||
         savedIp == '192.168.137.11' ||
         savedIp == '10.34.97.82' ||
         savedIp.isEmpty) {
-      _serverIp = detectedLocalIp;
-      await prefs.setString('server_ip', detectedLocalIp);
+      _serverIp = usbAdbIp;
+      await prefs.setString('server_ip', usbAdbIp);
     } else {
       _serverIp = savedIp;
     }
